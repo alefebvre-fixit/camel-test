@@ -3,6 +3,8 @@ apply plugin: 'java'
 //https://docs.gradle.org/current/userguide/application_plugin.html
 apply plugin: 'application'
 
+apply plugin: "com.github.johnrengelman.shadow"
+
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 
@@ -14,6 +16,7 @@ task wrapper(type: Wrapper) {
     gradleVersion = '2.10'
 }
 
+
 buildscript {
     repositories {
         mavenLocal()
@@ -24,6 +27,7 @@ buildscript {
     }
     dependencies {
         classpath group: 'se.transmode.gradle', name: 'gradle-docker', version: '1.2'
+        classpath "com.github.jengelman.gradle.plugins:shadow:1.2.3"
     }
 }
 
@@ -69,9 +73,9 @@ mainClassName = "ya.camel.CamelStarter"
 apply plugin: 'docker'
 
 
-task buildDocker(type: Docker, dependsOn: build) {
+task buildDocker(type: Docker, dependsOn: shadowJar) {
     push = false
-    tag = 'micro'
+    tag = 'camel-test'
     tagVersion = 'latest'
     dockerfile = file('src/main/docker/Dockerfile')
     doFirst {    

@@ -1,7 +1,7 @@
 FROM java:openjdk-8-jdk-alpine
 
 # add directly the jar
-ADD *.jar /app.jar
+ADD *-all.jar /app.jar
 
 RUN sh -c 'touch /app.jar'
 VOLUME /tmp

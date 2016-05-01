@@ -8,7 +8,7 @@ public class CamelStarter {
 		CamelContext context = new DefaultCamelContext();
 		context.addRoutes(new IntegrationRoute());
 		context.start();
-		Thread.sleep(30000);
+		Thread.sleep(300000);
 		context.stop();
 	}
 }
